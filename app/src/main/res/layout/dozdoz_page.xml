@@ -1,0 +1,252 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="20dp"
+    android:background="#0F1115">
+
+    <TextView
+        android:id="@+id/tvTitle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:paddingBottom="12dp"
+        android:text="دوزدوز"
+        android:textColor="#E8EAF0"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:id="@+id/actionBar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="2"
+        android:paddingBottom="12dp"
+        app:layout_constraintTop_toBottomOf="@id/tvTitle"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnStart"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginEnd="8dp"
+            android:text="شروع"
+            android:textStyle="bold"
+            android:textColor="#E8EAF0"
+            app:cornerRadius="14dp"
+            app:backgroundTint="#1B2230"
+            app:rippleColor="#334155"
+            app:strokeWidth="2dp"
+            app:strokeColor="#2A3242" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnReset"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginStart="8dp"
+            android:text="ریست"
+            android:textStyle="bold"
+            android:textColor="#E8EAF0"
+            app:cornerRadius="14dp"
+            app:backgroundTint="#1B2230"
+            app:rippleColor="#334155"
+            app:strokeWidth="2dp"
+            app:strokeColor="#2A3242" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/board"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        android:padding="10dp"
+        android:weightSum="3"
+        android:background="#151924"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/actionBar">
+
+        <!-- Row 0 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            android:weightSum="3">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn00"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:layout_margin="6dp"
+                android:text=""
+                android:textSize="32sp"
+                android:textStyle="bold"
+                android:textColor="#E8EAF0"
+                app:cornerRadius="16dp"
+                app:strokeWidth="2dp"
+                app:strokeColor="#2A3242"
+                app:backgroundTint="#1B2230"
+                app:rippleColor="#334155" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn01"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:layout_margin="6dp"
+                android:text=""
+                android:textSize="32sp"
+                android:textStyle="bold"
+                android:textColor="#E8EAF0"
+                app:cornerRadius="16dp"
+                app:strokeWidth="2dp"
+                app:strokeColor="#2A3242"
+                app:backgroundTint="#1B2230"
+                app:rippleColor="#334155" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn02"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:layout_margin="6dp"
+                android:text=""
+                android:textSize="32sp"
+                android:textStyle="bold"
+                android:textColor="#E8EAF0"
+                app:cornerRadius="16dp"
+                app:strokeWidth="2dp"
+                app:strokeColor="#2A3242"
+                app:backgroundTint="#1B2230"
+                app:rippleColor="#334155" />
+        </LinearLayout>
+
+        <!-- Row 1 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            android:weightSum="3">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn10"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:layout_margin="6dp"
+                android:text=""
+                android:textSize="32sp"
+                android:textStyle="bold"
+                android:textColor="#E8EAF0"
+                app:cornerRadius="16dp"
+                app:strokeWidth="2dp"
+                app:strokeColor="#2A3242"
+                app:backgroundTint="#1B2230"
+                app:rippleColor="#334155" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn11"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:layout_margin="6dp"
+                android:text=""
+                android:textSize="32sp"
+                android:textStyle="bold"
+                android:textColor="#E8EAF0"
+                app:cornerRadius="16dp"
+                app:strokeWidth="2dp"
+                app:strokeColor="#2A3242"
+                app:backgroundTint="#1B2230"
+                app:rippleColor="#334155" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn12"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:layout_margin="6dp"
+                android:text=""
+                android:textSize="32sp"
+                android:textStyle="bold"
+                android:textColor="#E8EAF0"
+                app:cornerRadius="16dp"
+                app:strokeWidth="2dp"
+                app:strokeColor="#2A3242"
+                app:backgroundTint="#1B2230"
+                app:rippleColor="#334155" />
+        </LinearLayout>
+
+        <!-- Row 2 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            android:weightSum="3">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn20"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:layout_margin="6dp"
+                android:text=""
+                android:textSize="32sp"
+                android:textStyle="bold"
+                android:textColor="#E8EAF0"
+                app:cornerRadius="16dp"
+                app:strokeWidth="2dp"
+                app:strokeColor="#2A3242"
+                app:backgroundTint="#1B2230"
+                app:rippleColor="#334155" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn21"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:layout_margin="6dp"
+                android:text=""
+                android:textSize="32sp"
+                android:textStyle="bold"
+                android:textColor="#E8EAF0"
+                app:cornerRadius="16dp"
+                app:strokeWidth="2dp"
+                app:strokeColor="#2A3242"
+                app:backgroundTint="#1B2230"
+                app:rippleColor="#334155" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn22"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:layout_margin="6dp"
+                android:text=""
+                android:textSize="32sp"
+                android:textStyle="bold"
+                android:textColor="#E8EAF0"
+                app:cornerRadius="16dp"
+                app:strokeWidth="2dp"
+                app:strokeColor="#2A3242"
+                app:backgroundTint="#1B2230"
+                app:rippleColor="#334155" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
