@@ -9,6 +9,7 @@ import com.google.android.material.button.MaterialButton
 class DozDozActivity : AppCompatActivity() {
 
     private var xTurn = true
+    private var gameActive = false
 
     private lateinit var b00: MaterialButton
     private lateinit var b01: MaterialButton
@@ -41,15 +42,9 @@ class DozDozActivity : AppCompatActivity() {
 
         all = listOf(b00, b01, b02, b10, b11, b12, b20, b21, b22)
 
-        btnStart.setOnClickListener {
-            resetGame()
-            Toast.makeText(this, "شروع شد", Toast.LENGTH_SHORT).show()
-        }
+        btnStart.setOnClickListener { startGame(showToast = true) }
 
-        btnReset.setOnClickListener {
-            resetGame()
-            Toast.makeText(this, "ریست شد", Toast.LENGTH_SHORT).show()
-        }
+        btnReset.setOnClickListener { startGame(showToast = false) }
 
         b00.setOnClickListener { play(b00) }
         b01.setOnClickListener { play(b01) }
@@ -61,19 +56,26 @@ class DozDozActivity : AppCompatActivity() {
         b21.setOnClickListener { play(b21) }
         b22.setOnClickListener { play(b22) }
 
-        resetGame()
+        startGame(showToast = false)
     }
 
-    private fun resetGame() {
-        for (b in all) {
-            b.text = ""
-            b.isEnabled = true
-            b.setTextColor(Color.BLACK)
+    private fun startGame(showToast: Boolean) {
+        all.forEach { button ->
+            button.text = ""
+            button.isEnabled = true
+            button.setTextColor(Color.BLACK)
         }
         xTurn = true
+        gameActive = true
+
+        if (showToast) {
+            Toast.makeText(this, "شروع شد", Toast.LENGTH_SHORT).show()
+        }
     }
 
     private fun play(btn: MaterialButton) {
+        if (!gameActive || btn.text.isNotEmpty()) return
+
         val p = if (xTurn) "X" else "O"
         btn.text = p
         btn.isEnabled = false
@@ -82,12 +84,14 @@ class DozDozActivity : AppCompatActivity() {
         if (checkWin(p)) {
             for (b in all) b.isEnabled = false
             Toast.makeText(this, "$p برنده شد!", Toast.LENGTH_SHORT).show()
+            gameActive = false
             return
         }
 
         val anyEmpty = all.any { it.isEnabled }
         if (!anyEmpty) {
             Toast.makeText(this, "مساوی!", Toast.LENGTH_SHORT).show()
+            gameActive = false
             return
         }
 
