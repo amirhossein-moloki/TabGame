@@ -42,6 +42,7 @@ class MainActivity : AppCompatActivity() {
         mainTab.setContent {mainView}
         tabHost.addTab(mainTab)
 
+        tabHost.currentTab = 2
 
 
     }
