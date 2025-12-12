@@ -1,13 +1,15 @@
+package com.example.tabgames
+
 import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.MotionEvent
 import android.view.View
+import android.view.ViewTreeObserver
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.button.MaterialButton
 import kotlin.math.sqrt
-import android.R
 
-class MainActivity : AppCompatActivity() {
+class MTActivity : AppCompatActivity() {
 
     // دکمه‌ها و لیبل‌ها
     private lateinit var tiles: Array<MaterialButton>
@@ -19,6 +21,8 @@ class MainActivity : AppCompatActivity() {
     private lateinit var startLabelX: FloatArray
     private lateinit var startLabelY: FloatArray
 
+    private var positionsCaptured = false
+
     // برای drag
     private var dx = 0f
     private var dy = 0f
@@ -29,6 +33,8 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.mt_page)
+
+        val contentRoot = findViewById<View>(android.R.id.content)
 
         tiles = arrayOf(
             findViewById(R.id.tile1), findViewById(R.id.tile2), findViewById(R.id.tile3), findViewById(R.id.tile4),
@@ -50,12 +56,15 @@ class MainActivity : AppCompatActivity() {
         startLabelX = FloatArray(labels.size)
         startLabelY = FloatArray(labels.size)
 
-        for (i in tiles.indices) {
-            startTileX[i] = tiles[i].translationX
-            startTileY[i] = tiles[i].translationY
-            startLabelX[i] = labels[i].translationX
-            startLabelY[i] = labels[i].translationY
-        }
+        contentRoot.viewTreeObserver
+            .addOnGlobalLayoutListener(object : ViewTreeObserver.OnGlobalLayoutListener {
+                override fun onGlobalLayout() {
+                    captureStartPositions()
+                    if (positionsCaptured) {
+                        contentRoot.viewTreeObserver.removeOnGlobalLayoutListener(this)
+                    }
+                }
+            })
 
         // فعال کردن drag برای همه
         for (i in tiles.indices) {
@@ -69,15 +78,31 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun resetAll() {
+        captureStartPositions()
         for (i in tiles.indices) {
-            tiles[i].translationX = startTileX[i]
-            tiles[i].translationY = startTileY[i]
+            tiles[i].x = startTileX[i]
+            tiles[i].y = startTileY[i]
+            tiles[i].translationX = 0f
+            tiles[i].translationY = 0f
             tiles[i].visibility = View.VISIBLE
 
-            labels[i].translationX = startLabelX[i]
-            labels[i].translationY = startLabelY[i]
+            labels[i].x = startLabelX[i]
+            labels[i].y = startLabelY[i]
+            labels[i].translationX = 0f
+            labels[i].translationY = 0f
             labels[i].visibility = View.VISIBLE
         }
+    }
+
+    private fun captureStartPositions() {
+        if (positionsCaptured) return
+        for (i in tiles.indices) {
+            startTileX[i] = tiles[i].x
+            startTileY[i] = tiles[i].y
+            startLabelX[i] = labels[i].x
+            startLabelY[i] = labels[i].y
+        }
+        positionsCaptured = true
     }
 
     @SuppressLint("ClickableViewAccessibility")
@@ -88,21 +113,21 @@ class MainActivity : AppCompatActivity() {
         tile.setOnTouchListener { v, e ->
             when (e.actionMasked) {
                 MotionEvent.ACTION_DOWN -> {
-                    dx = v.translationX - e.rawX
-                    dy = v.translationY - e.rawY
+                    dx = e.rawX - v.x
+                    dy = e.rawY - v.y
                     true
                 }
 
                 MotionEvent.ACTION_MOVE -> {
-                    val newX = e.rawX + dx
-                    val newY = e.rawY + dy
+                    val newX = e.rawX - dx
+                    val newY = e.rawY - dy
 
-                    v.translationX = newX
-                    v.translationY = newY
+                    v.x = newX
+                    v.y = newY
 
                     // لیبل هم همراهش بیاد
-                    label.translationX = newX
-                    label.translationY = newY
+                    label.x = newX
+                    label.y = newY
                     true
                 }
 
@@ -141,10 +166,10 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun distance(a: View, b: View): Float {
-        val ax = a.x + a.translationX
-        val ay = a.y + a.translationY
-        val bx = b.x + b.translationX
-        val by = b.y + b.translationY
+        val ax = a.x
+        val ay = a.y
+        val bx = b.x
+        val by = b.y
 
         val dx = ax - bx
         val dy = ay - by
